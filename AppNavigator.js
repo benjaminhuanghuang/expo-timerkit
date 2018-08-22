@@ -13,12 +13,12 @@ import AnalysisScreen from "./screens/AnalysisScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 
 const AppTabNavigator = createBottomTabNavigator({
-    Train: TrainScreen,
+    HIT: TrainScreen,
     Editor: EditorScreen,
     Analysis: AnalysisScreen,
     Settins: SettingsScreen
 }, {
-        initialRouteName: 'Train'
+        initialRouteName: 'HIT'
     });
 
 // Navigator for app screens and timer

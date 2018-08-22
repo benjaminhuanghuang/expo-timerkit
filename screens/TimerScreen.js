@@ -53,7 +53,7 @@ export default class TimerScreen extends React.Component {
 
   quit() {
     debugger;
-    this.props.navigation.goBack();
+    this.props.navigation.navigate('HIT');
   }
 
   renderTimerButton() {
