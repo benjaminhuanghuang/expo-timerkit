@@ -21,7 +21,7 @@ export default class TimerScreen extends React.Component {
         timer: 1234567,
         start: 0,
         now: 0,
-        plan:{}
+        plan: {}
       };
   }
 
@@ -41,8 +41,7 @@ export default class TimerScreen extends React.Component {
 
   }
 
-  renderTimerButton()
-  {
+  renderTimerButton() {
 
   }
 
@@ -50,8 +49,11 @@ export default class TimerScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.screenTitle}>HIT Workkout</Text>
-        <RoundButton style={styles.timerButton} title="Start" color="#E33935" background="#3C1715"
-          onPress={() => this.start()} />
+        <View style={styles.buttonContainer}>
+          <RoundButton style={styles.timerButton} title="Start" color="#E33935" background="#3C1715"
+            onPress={() => this.start()} />
+        </View>
+
       </View>
     )
   }
@@ -72,7 +74,8 @@ const styles = StyleSheet.create({
     fontWeight: '300',
   },
 
-  timerButton:{
-    padding: 400,
+  buttonContainer: {
+    position: 'absolute',
+    bottom: 200,
   }
 })
