@@ -4,22 +4,31 @@ import {
     createSwitchNavigator,
     createBottomTabNavigator
 } from "react-navigation";
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-// App navigator
-import TimerScreen from "./screens/TimerScreen";
+// App tab navigator
+import TrainScreen from "./screens/TrainScreen";
 import EditorScreen from "./screens/EditorScreen";
 import AnalysisScreen from "./screens/AnalysisScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 
-
-
-const AppNavigator = createBottomTabNavigator({
-    Timer: TimerScreen,
+const AppTabNavigator = createBottomTabNavigator({
+    Train: TrainScreen,
     Editor: EditorScreen,
     Analysis: AnalysisScreen,
     Settins: SettingsScreen
 }, {
-        initialRouteName: 'Timer'
+        initialRouteName: 'Train'
+    });
+
+// Navigator for app screens and timer
+import TimerScreen from "./screens/TimerScreen";
+
+const AppNavigator = createSwitchNavigator({
+    AppTabs: AppTabNavigator,
+    Timer: TimerScreen
+}, {
+        initialRouteName: 'AppTabs'
     });
 
 export default AppNavigator;

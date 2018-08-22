@@ -5,11 +5,11 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 //
 import RoundButton from '../components/RoundButton';
 
-export default class TimerScreen extends React.Component {
+export default class PlanScreen extends React.Component {
   // Settings for the tab navigation
   static navigationOptions = {
     tabBarIcon: ({ focused, tintColor }) => (
-      <Ionicons name={`ios-timer${focused ? '' : '-outline'}`} size={25} color={tintColor} />
+      <Ionicons name={`ios-body${focused ? '' : '-outline'}`} size={25} color={tintColor} />
     ),
   }
 
@@ -36,37 +36,17 @@ export default class TimerScreen extends React.Component {
   }
 
   start() {
-
+    this.props.navigation.navigate('Timer');
   }
 
-  pause() {
-
-  }
-
-  stop() {
-
-  }
-
-  edit() {
-
-  }
-
-  quit() {
-    debugger;
-    this.props.navigation.goBack();
-  }
-
-  renderTimerButton() {
-
-  }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.screenTitle}>HIT Timer</Text>
+        <Text style={styles.screenTitle}>HIT Workkout</Text>
         <View style={styles.buttonContainer}>
           <RoundButton style={styles.timerButton} title="Start" color="#E33935" background="#3C1715"
-            onPress={() => this.quit()} />
+            onPress={() => this.start()} />
         </View>
 
       </View>

@@ -6,7 +6,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 export default class AnalysisScreen extends React.Component {
   static navigationOptions = {
     tabBarIcon: ({focused, tintColor}) => (
-      <Ionicons name={`ios-analytics${focused ? '' : '-outline'}`} size={25} color={tintColor} />
+      <Ionicons name={`ios-stats${focused ? '' : '-outline'}`} size={25} color={tintColor} />
     ),
   }
   render() {
