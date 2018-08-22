@@ -21,7 +21,17 @@ export default class TimerScreen extends React.Component {
         timer: 1234567,
         start: 0,
         now: 0,
-        plan: {}
+        plan: {
+          name: 'Default Plan',
+          type: 'basic',
+          pattern: {
+            workout: 60,
+            recover: 20,
+            sets: 4,
+            cycles: 4,
+            cycleRecover: 40
+          }
+        }
       };
   }
 
