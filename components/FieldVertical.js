@@ -27,18 +27,19 @@ function FieldVertical({ label, value, multiLine, color }) {
 
 const styles = StyleSheet.create({
     container: {
+        flex:1,
         justifyContent: 'center',
         alignItems: 'center'
     },
 
     label: {
-        fontSize: 18,
+        fontSize: 14,
         fontWeight: '500'
     },
 
     value: {
-        fontSize: 14,
-        fontWeight: '300'
+        fontSize: 18,
+        fontWeight: '800'
     }
 });
 

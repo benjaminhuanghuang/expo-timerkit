@@ -5,8 +5,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 //
 import RowContainer from '../components/RowContainer';
 import FiledVertical from '../components/FieldVertical';
-import FieldHorizontal from '../components/FieldHorizontal';
 import RoundButton from '../components/RoundButton';
+
+import {formatSeconds} from '../Utils.js';
 
 export default class PlanScreen extends React.Component {
   // Settings for the tab navigation
@@ -19,43 +20,60 @@ export default class PlanScreen extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state =
-      {
-        timer: 1234567,
-        start: 0,
-        now: 0,
-        plan: {
-          name: 'Default Plan',
-          type: 'basic',
-          pattern: {
-            workout: 60,
-            recover: 20,
-            sets: 4,
-            cycles: 4,
-            cycleRecover: 40
-          }
+    this.state = {
+      plan: {
+        name: 'Default Plan',
+        type: 'basic',
+        pattern: {
+          workout: 60,
+          recover: 20,
+          sets: 4,
+          cycles: 4,
+          cycleRecover: 40
         }
-      };
+      }
+    };
   }
 
   start() {
     this.props.navigation.navigate('Timer');
   }
 
+  parsePlan(plan) {
+    
+    if (plan.type === 'basic') {
+      let {workout, recover, sets, cycles, cycleRecover} = plan.pattern;
+      let cycleTime = workout * sets + recover * (sets - 1);
+      let totalTime = cycleTime * cycles + cycleRecover * (cycles - 1);
+
+      return {
+        workout: formatSeconds(workout),
+        recover: formatSeconds(recover),
+        sets,
+        cycles,
+        cycleRecover: formatSeconds(cycleRecover),
+        totalTime:formatSeconds(totalTime)
+      }
+    }
+  }
 
   render() {
+    let { workout, recover, sets, cycles, cycleRecover, totalTime } = this.parsePlan(this.state.plan);
+
     return (
       <View style={styles.container}>
-        <Text style={styles.screenTitle}>HIT Workkout</Text>
+        <Text style={styles.screenTitle}>HIT Workout</Text>
         <RowContainer>
-          <FiledVertical label="WORK OUT" value="00:40" />
-          <FiledVertical label="RECOVER" value="00:200" />
+          <FiledVertical label="WORK OUT" value={workout} />
+          <FiledVertical label="RECOVER" value={recover} />
+          <FiledVertical label="SETS" value={sets} />
         </RowContainer>
         <RowContainer>
-          <FiledVertical label="SETS" value="4" />
-          <FiledVertical label="TOTAL TIME" value="19:40"  />
-          <FiledVertical label="CYCLES" value="3" />
+          <FiledVertical label="CYCLES COUNT" value={cycles} multiLine/>
+          <FiledVertical label="TOTAL TIME" value={totalTime} multiLine/>
+          <FiledVertical label="CYCLE RECOVER" value={cycleRecover} multiLine/>
         </RowContainer>
+
         <View style={styles.buttonContainer}>
           <RoundButton style={styles.timerButton} title="Start" color="#E33935" background="#3C1715"
             onPress={() => this.start()} />
