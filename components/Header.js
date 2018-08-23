@@ -1,16 +1,16 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-function RowContainer({ children }) {
+function Header({ children }) {
     return (
-        <View style={styles.rowContainer}>
+        <View style={styles.header}>
             {children}
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    rowContainer: {
+    header: {
         flexDirection: 'row',
         alignSelf: 'stretch',
         justifyContent: 'space-between',
@@ -18,4 +18,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default RowContainer;
+export default Header;

@@ -3,6 +3,9 @@ import { Button, View, StyleSheet, Text } from 'react-native'
 
 import Ionicons from 'react-native-vector-icons/Ionicons'
 //
+import RowContainer from '../components/RowContainer';
+import FiledVertical from '../components/FieldVertical';
+import FieldHorizontal from '../components/FieldHorizontal';
 import RoundButton from '../components/RoundButton';
 
 export default class PlanScreen extends React.Component {
@@ -44,11 +47,19 @@ export default class PlanScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.screenTitle}>HIT Workkout</Text>
+        <RowContainer>
+          <FiledVertical label="WORK OUT" value="00:40" />
+          <FiledVertical label="RECOVER" value="00:200" />
+        </RowContainer>
+        <RowContainer>
+          <FiledVertical label="SETS" value="4" />
+          <FiledVertical label="TOTAL TIME" value="19:40"  />
+          <FiledVertical label="CYCLES" value="3" />
+        </RowContainer>
         <View style={styles.buttonContainer}>
           <RoundButton style={styles.timerButton} title="Start" color="#E33935" background="#3C1715"
             onPress={() => this.start()} />
         </View>
-
       </View>
     )
   }
