@@ -7,7 +7,7 @@ import RowContainer from '../components/RowContainer';
 import FiledVertical from '../components/FieldVertical';
 import RoundButton from '../components/RoundButton';
 
-import {formatSeconds} from '../Utils.js';
+import { parsePlan } from '../Utils.js';
 
 export default class PlanScreen extends React.Component {
   // Settings for the tab navigation
@@ -36,29 +36,11 @@ export default class PlanScreen extends React.Component {
   }
 
   start() {
-    this.props.navigation.navigate('Timer');
-  }
-
-  parsePlan(plan) {
-    
-    if (plan.type === 'basic') {
-      let {workout, recover, sets, cycles, cycleRecover} = plan.pattern;
-      let cycleTime = workout * sets + recover * (sets - 1);
-      let totalTime = cycleTime * cycles + cycleRecover * (cycles - 1);
-
-      return {
-        workout: formatSeconds(workout),
-        recover: formatSeconds(recover),
-        sets,
-        cycles,
-        cycleRecover: formatSeconds(cycleRecover),
-        totalTime:formatSeconds(totalTime)
-      }
-    }
+    this.props.navigation.navigate('Timer', { plan: this.state.plan });
   }
 
   render() {
-    let { workout, recover, sets, cycles, cycleRecover, totalTime } = this.parsePlan(this.state.plan);
+    let { workout, recover, sets, cycles, cycleRecover, totalTime } = parsePlan(this.state.plan);
 
     return (
       <View style={styles.container}>
@@ -69,9 +51,9 @@ export default class PlanScreen extends React.Component {
           <FiledVertical label="SETS" value={sets} />
         </RowContainer>
         <RowContainer>
-          <FiledVertical label="CYCLES COUNT" value={cycles} multiLine/>
-          <FiledVertical label="TOTAL TIME" value={totalTime} multiLine/>
-          <FiledVertical label="CYCLE RECOVER" value={cycleRecover} multiLine/>
+          <FiledVertical label="CYCLES COUNT" value={cycles} multiLine />
+          <FiledVertical label="TOTAL TIME" value={totalTime} multiLine />
+          <FiledVertical label="CYCLE RECOVER" value={cycleRecover} multiLine />
         </RowContainer>
 
         <View style={styles.buttonContainer}>

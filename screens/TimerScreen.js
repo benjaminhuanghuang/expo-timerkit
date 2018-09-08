@@ -10,6 +10,7 @@ import RowContainer from '../components/RowContainer';
 import Indicator from '../components/Indicator';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { parsePlan, formatSeconds, formatDuration } from '../Utils.js';
 
 
 export default class TimerScreen extends React.Component {
@@ -28,18 +29,12 @@ export default class TimerScreen extends React.Component {
         timer: 1234567,
         start: 0,
         now: 0,
-        plan: {
-          name: 'Default Plan',
-          type: 'basic',
-          pattern: {
-            workout: 60,
-            recover: 20,
-            sets: 4,
-            cycles: 4,
-            cycleRecover: 40
-          }
-        }
       };
+  }
+  componentWillMount() {
+    let plan = this.props.navigation.getParam('plan');
+    let parsedPlan = parsePlan(plan);
+    this.start();
   }
 
   componentWillUnmount() {
@@ -93,7 +88,6 @@ export default class TimerScreen extends React.Component {
   }
 
   quit() {
-    debugger;
     this.props.navigation.navigate('HIT');
   }
 
@@ -113,9 +107,9 @@ export default class TimerScreen extends React.Component {
             onPress={() => this.quit()} />
         </View>
         <Footer>
-          <FiledVertical label="SETS LEFT" value="4" multiLine/>
-          <FiledVertical label="TIME PASSED" value="19:40" multiLine/>
-          <FiledVertical label="CYCLES LEFT" value="3" multiLine/>
+          <FiledVertical label="SETS LEFT" value="4" multiLine />
+          <FiledVertical label="TIME PASSED" value={formatDuration(this.state.now - this.state.start)} multiLine />
+          <FiledVertical label="CYCLES LEFT" value="3" multiLine />
         </Footer>
       </View>
     )
