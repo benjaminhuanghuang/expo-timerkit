@@ -6,4 +6,10 @@
 
 ## Commands
 - Start
+```
+  npm start
+```
   
+
+
+## To do
