@@ -1,11 +1,14 @@
 {
   "expo": {
-    "name": "Gym Timer",
-    "description": "A very interesting project.",
-    "slug": "expoTest31",
+    "name": "MMA Timer",
+    "slug": "mma-timer",
     "privacy": "public",
-    "sdkVersion": "31.0.0",
-    "platforms": ["ios", "android"],
+    "sdkVersion": "36.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
