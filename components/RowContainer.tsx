@@ -3,10 +3,11 @@ import { StyleSheet, View } from "react-native";
 
 interface RowContainerProps {
     children: any
+    height:number
 }
 
 export const RowContainer: React.SFC<RowContainerProps> = ({ children }) : JSX.Element=> {
-  return <View style={styles.rowContainer}>{children}</View>;
+  return <View style={styles.rowContainer}>{children}</View>
 };
 
 const styles = StyleSheet.create({
@@ -14,6 +15,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignSelf: "stretch",
     justifyContent: "space-between",
-    marginTop: 30
+    marginTop: 30,
+    height:50
   }
 });

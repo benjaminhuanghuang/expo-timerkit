@@ -16,7 +16,8 @@ import {
   AboutScreen,
   EditorScreen,
   SettingsScreen,
-  CountdownScreen
+  CountdownScreen,
+  StopwatchScreen
 } from "./screens";
 
 const Drawer = createDrawerNavigator();
@@ -63,7 +64,7 @@ export default function App() {
         />
           <BottomTabs.Screen
           name="stopwatch"
-          component={CountdownScreen}
+          component={StopwatchScreen}
           options={{
             tabBarLabel: "Stopwatch",
             tabBarIcon: ({color}) => (

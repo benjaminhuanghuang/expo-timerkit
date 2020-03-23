@@ -2,27 +2,43 @@ import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 interface RoundButtonProps {
+  width: number;
+  height: number;
+  borderRadius?: number;
   title: string;
   color?: string;
-  background?: String;
+  backgroundColor?: string;
   onPress: any;
   disabled?: boolean;
 }
 
 export const RoundButton: React.SFC<RoundButtonProps> = ({
+  width,
+  height,
+  borderRadius = 0,
   title,
   color,
-  background,
+  backgroundColor,
   onPress,
   disabled = false
 }): JSX.Element => {
+  const buttonStyle = {
+    width,
+    height,
+    borderRadius
+  };
   return (
     <TouchableOpacity
       onPress={() => !disabled && onPress()}
-      style={[styles.roundButton]}
+      style={[styles.buttonContainer, buttonStyle]}
       activeOpacity={disabled ? 1 : 0.7}
     >
-      <View style={styles.buttonBorder}>
+      <View
+        style={[
+          buttonStyle,
+          { backgroundColor, justifyContent: "center", alignItems: "center" }
+        ]}
+      >
         <Text style={[styles.buttonTitle, { color }]}>{title}</Text>
       </View>
     </TouchableOpacity>
@@ -30,26 +46,14 @@ export const RoundButton: React.SFC<RoundButtonProps> = ({
 };
 
 const styles = StyleSheet.create({
-  roundButton: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    justifyContent: "center",
-    alignItems: "center"
-  },
-
-  buttonBorder: {
-    width: 76,
-    height: 76,
-    borderRadius: 38,
+  buttonContainer: {
     borderWidth: 2,
     justifyContent: "center",
     alignItems: "center"
   },
-
   buttonTitle: {
-    fontSize: 18,
-    fontWeight: "500"
+    fontSize: 20,
+    fontWeight: "bold"
   }
 });
 
