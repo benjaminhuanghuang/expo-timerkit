@@ -9,7 +9,7 @@ import RoundButton from '../components/RoundButton';
 
 import { parsePlan } from '../Utils.js';
 
-export default class PlanScreen extends React.Component {
+export class RunnerScreen extends React.Component {
   // Settings for the tab navigation
   static navigationOptions = {
     tabBarIcon: ({ focused, tintColor }) => (

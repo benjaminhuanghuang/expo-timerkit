@@ -3,7 +3,7 @@ import { AppRegistry, FlatList, StyleSheet, Text, View } from 'react-native';
 
 import { Ionicons } from '@expo/vector-icons';
 
-export default class PlanListScreen extends React.Component {
+export class PlansScreen extends React.Component {
   static navigationOptions = {
     tabBarIcon: ({focused, tintColor}) => (
       <Ionicons name={`ios-stats${focused ? '' : '-outline'}`} size={25} color={tintColor} />
