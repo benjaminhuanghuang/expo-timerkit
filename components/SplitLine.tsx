@@ -11,7 +11,7 @@ export const SplitLine: React.SFC = (): JSX.Element => {
       marginTop:20,
       height: 2,
       width: 80,
-      backgroundColor: COLORS.FONT_COLOR_DARK,
+      backgroundColor: COLORS.FRONTGROUND_COLOR_GRAY,
   }}/>
   );
 };
