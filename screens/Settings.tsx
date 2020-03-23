@@ -7,9 +7,9 @@ import { globalStyles } from '../globalStyles';
 
 export const SettingsScreen : React.SFC = ():  JSX.Element =>{
   return (
-    <View style={globalStyles.screenContainer}>
-      <Text style = {globalStyles.h3}>About...</Text>
-      <Button title="Go to" onPress={()=>{}}></Button>
-    </View>
+    <>
+      <Text style = {globalStyles.h3}>Settings...</Text>
+  
+    </>
   )
 }

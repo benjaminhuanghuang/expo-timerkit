@@ -1,9 +1,10 @@
-export * from './Favorite'
+export * from './Timers'
+export * from './Support'
 export * from './Runner'
-export * from './Plans'
+export * from './Countdown'
 export * from './Editor'
 export * from './Analysis'
-export * from './Analysis'
+export * from './Settings'
 export * from './About'
 
 

@@ -7,7 +7,7 @@ interface FieldHorizontalProps {
   color: string;
 }
 
-const Fieldhorizontal: React.SFC<FieldHorizontalProps> = ({
+export const Fieldhorizontal: React.SFC<FieldHorizontalProps> = ({
   label,
   value,
   color
@@ -37,5 +37,3 @@ const styles = StyleSheet.create({
     fontWeight: "300"
   }
 });
-
-export default Fieldhorizontal;

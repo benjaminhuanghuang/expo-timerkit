@@ -5,10 +5,10 @@ import { globalStyles } from '../globalStyles';
 
 export const EditorScreen : React.SFC = ():  JSX.Element =>{
   return (
-    <View style={globalStyles.screenContainer}>
+    <>
       <Text style = {globalStyles.h3}>Analysis...</Text>
       <Button title="Go to" onPress={()=>{}}></Button>
-    </View>
+    </>
   )
 }
 

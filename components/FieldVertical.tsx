@@ -8,7 +8,7 @@ interface FieldVerticalProps{
   multiLine: Boolean;
   color: string
 }
-const FieldVertical:React.SFC<FieldVerticalProps> = ({ label, value, multiLine, color })=> {
+export const FieldVertical:React.SFC<FieldVerticalProps> = ({ label, value, multiLine, color })=> {
 
   const renderLabel = (label, multiLine, color)=> {
     if (multiLine) {
@@ -47,5 +47,3 @@ const styles = StyleSheet.create({
     fontWeight: "800"
   }
 });
-
-export default FieldVertical;

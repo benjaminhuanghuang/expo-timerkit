@@ -1,44 +1,45 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from "react-native";
 
+export const COLORS = {
+  BACKGROUND_COLOR: "#000000",  // black
+  FRONTGROUND_COLOR: "#FFFFFF",
+  FRONTGROUND_COLOR_GRAY: "#7E7E7E",
 
-export const COLORS = 
-{
-  TITLE_COLOR: "#9F2447",
-  FONT_COLOR_NORMAL: "#797979",
-  FONT_COLOR_DARK: "#4B4B4B"
+  ACTIVE_ICON_COLOR: "#FF3D2D",  // red
+  INACTIVE_ICON_COLOR: "#7E7E7E",  // red
+
+  BUTTON_BACKGROUND :"#EC5E39",
+  BUTTON_FRONTGROUND: "#FFFFFF",
 }
-
 
 export const globalStyles = StyleSheet.create({
   appContainer: {
     flex: 1,
-    paddingBottom:20
+    paddingTop: 40,
+    backgroundColor: COLORS.BACKGROUND_COLOR
   },
   screenContainer: {
-    paddingTop: 40,
     flex: 1,
-    paddingLeft:10,
-    paddingRight:10
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 20,
+    backgroundColor: COLORS.BACKGROUND_COLOR
   },
   h1: {
     fontSize: 36,
-    color: COLORS.FONT_COLOR_DARK
+    color: COLORS.FRONTGROUND_COLOR
   },
   h2: {
     fontSize: 30,
-    color: COLORS.FONT_COLOR_DARK
+    color: COLORS.FRONTGROUND_COLOR
   },
   h3: {
     fontSize: 25,
-    color: COLORS.FONT_COLOR_DARK
+    color: COLORS.FRONTGROUND_COLOR
   },
   text: {
     fontSize: 17,
-    color: COLORS.FONT_COLOR_NORMAL,
+    color: COLORS.FRONTGROUND_COLOR,
     lineHeight: 25
-  },
-  androidButtonText: {
-    color: 'blue',
-    fontSize: 20
   }
 });
