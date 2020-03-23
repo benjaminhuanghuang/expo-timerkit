@@ -35,7 +35,9 @@ export default function App() {
           },
           labelStyle:
           {
-            fontSize:15
+            // style of the font in bottom tab
+            fontSize:12,
+            fontWeight:"bold"
           },
         }
       }>
@@ -59,13 +61,23 @@ export default function App() {
             )
           }}
         />
+          <BottomTabs.Screen
+          name="stopwatch"
+          component={CountdownScreen}
+          options={{
+            tabBarLabel: "Stopwatch",
+            tabBarIcon: ({color}) => (
+              <Ionicons color={color} size={25} name="md-stopwatch" />
+            )
+          }}
+        />
         <BottomTabs.Screen
           name="suport"
           component={SupportScreen}
           options={{
             tabBarLabel: "Support",
             tabBarIcon: ({color}) => (
-              <Ionicons color={color} size={25} name="md-flash" />
+              <Ionicons color={color} size={25} name="ios-call" />
             )
           }}
         />
