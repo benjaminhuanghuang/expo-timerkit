@@ -4,17 +4,17 @@ import { View, Text, StyleSheet } from "react-native";
 import moment from "moment";
 //
 export interface DigitalTimerProps {
-  elapsedTime: number;
+  timeElapsed: number;
   style: any;
 }
 
 export const DigitalTimer: React.SFC<DigitalTimerProps> = ({
-  elapsedTime,
+  timeElapsed,
   style
 }): JSX.Element => {
   const pad = n => (n < 10 ? "0" + n : n);
 
-  const duration = moment.duration(elapsedTime);
+  const duration = moment.duration(timeElapsed);
   const mins = duration.minutes();
   const seconds = duration.seconds();
   const centiseconds = Math.floor(duration.milliseconds() / 10);

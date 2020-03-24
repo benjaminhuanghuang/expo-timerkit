@@ -40,15 +40,15 @@ const LapItem: React.SFC<LapProps> = ({
     <View style={styles.lap}>
       <Text style={lapTextStyle}>Lap {number}</Text>
       <DigitalTimer
-        style={[lapTextStyle, styles.lapTimer]}
-        interval={interval}
+        style={lapTextStyle}
+        timeElapsed={interval}
       />
     </View>
   );
 };
 
 interface LapsTableProps {
-  laps: Lap[];
+  laps: number[];
   timer: any;
 }
 
@@ -60,8 +60,8 @@ const LapsTable: React.SFC<LapsTableProps> = ({ laps, timer }) => {
   // find out min and max lap interval
   if (finishedLaps.length >= 2) {
     finishedLaps.forEach(lap => {
-      if (lap.interval < min) min = lap.interval;
-      if (lap.interval > max) max = lap.interval;
+      if (lap < min) min = lap;
+      if (lap > max) max = lap;
     });
   }
 
@@ -72,8 +72,8 @@ const LapsTable: React.SFC<LapsTableProps> = ({ laps, timer }) => {
           key={index}
           number={laps.length - index}
           interval={index === 0 ? timer + lap : lap}
-          isSlowest={lap.interval === max}
-          isFastest={lap.interval === min}
+          isSlowest={lap === max}
+          isFastest={lap === min}
         />
       ))}
     </ScrollView>
@@ -88,7 +88,7 @@ export const StopwatchScreen: React.SFC = (): JSX.Element => {
   const [timerFunction, setTimerFunction] = useState(0);
 
   const [status, setStatus] = useState(StatusEnum.STOPPED);
-  const elapsedTimeWhenLap: number[] = [];
+  const intervalsByLap: number[] = [1000,2000,3000];
 
   useEffect(() => {
     return () => clearInterval(timerFunction);
@@ -125,7 +125,7 @@ export const StopwatchScreen: React.SFC = (): JSX.Element => {
   return (
     <View style={globalStyles.screenContainer}>
       <RowContainer height={240}>
-        <DigitalTimer elapsedTime={12345} style={styles.timer} />
+        <DigitalTimer timeElapsed={12345} style={styles.timer} />
       </RowContainer>
 
       <RowContainer height={80}>
@@ -144,7 +144,7 @@ export const StopwatchScreen: React.SFC = (): JSX.Element => {
           title={runButtonTitle}
         />
       </RowContainer>
-      <LapsTable laps={[]} timer={12345} />
+      <LapsTable laps={intervalsByLap} timer={12345} />
     </View>
   );
 };
@@ -153,14 +153,11 @@ const styles = StyleSheet.create({
   lap: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
     borderColor: "#151515",
     borderTopWidth: 1,
     paddingVertical: 10
   },
-  lapTimer: {
-    width: 30
-  },
-
   lapText: {
     color: "#FFFFFF",
     fontSize: 18
@@ -173,6 +170,7 @@ const styles = StyleSheet.create({
   },
 
   scrollView: {
+    marginTop: 40,
     alignSelf: "stretch"
   },
 
