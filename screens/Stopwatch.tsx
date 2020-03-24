@@ -96,14 +96,9 @@ export const StopwatchScreen: React.SFC = (): JSX.Element => {
 
   const lapButtonTitle = status === StatusEnum.RUNNING ? "Lap" : "Reset";
   const runButtonTitle = status === StatusEnum.RUNNING ? "Stop" : "Start";
-  const runButtonColor =
-    status === StatusEnum.RUNNING
-      ? "#FFFFFF"
-      : "#50D167";
+  const runButtonColor = status === StatusEnum.RUNNING ? "#FFFFFF" : "#50D167";
   const runButtonBGColor =
-    status === StatusEnum.RUNNING
-      ? COLORS.BUTTON_BACKGROUND_RED
-      : "#1B361F";
+    status === StatusEnum.RUNNING ? COLORS.BUTTON_BACKGROUND_RED : "#1B361F";
 
   const onLapButtonClick = () => {
     if (status === StatusEnum.RUNNING) {
@@ -129,9 +124,11 @@ export const StopwatchScreen: React.SFC = (): JSX.Element => {
 
   return (
     <View style={globalStyles.screenContainer}>
-      <DigitalTimer elapsedTime={12345}
-          style={styles.timer}/>
-      <RowContainer height={140}>
+      <RowContainer height={240}>
+        <DigitalTimer elapsedTime={12345} style={styles.timer} />
+      </RowContainer>
+
+      <RowContainer height={80}>
         <RoundButton
           color={COLORS.FRONTGROUND_COLOR}
           backgroundColor={COLORS.FRONTGROUND_COLOR_GRAY}
@@ -147,7 +144,7 @@ export const StopwatchScreen: React.SFC = (): JSX.Element => {
           title={runButtonTitle}
         />
       </RowContainer>
-      <LapsTable laps={[]} timer={12345}/>
+      <LapsTable laps={[]} timer={12345} />
     </View>
   );
 };
@@ -172,8 +169,7 @@ const styles = StyleSheet.create({
   timer: {
     color: "#FFFFFF",
     fontSize: 76,
-    fontWeight: "200",
-    width: 110
+    fontWeight: "200"
   },
 
   scrollView: {

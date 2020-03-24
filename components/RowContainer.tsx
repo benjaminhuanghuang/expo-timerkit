@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignSelf: "stretch",
     justifyContent: "space-around",
+    alignItems: "center",
     marginTop: 30
   }
 });
