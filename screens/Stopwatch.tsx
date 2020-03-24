@@ -96,7 +96,13 @@ export const StopwatchScreen: React.SFC = (): JSX.Element => {
     return () => clearInterval(interval);
   }, [now]);
 
-  const createLap = () => {};
+  const createLap = () => {
+    const now = new Date().getTime();
+    const [firstLap, ...other] = intervalsByLap;
+    setNow(now);
+    setStart(now);
+    setIntervalsByLap([0, firstLap + now - start, ...other]);
+  };
 
   const startTimer = () => {
     setStatus(StatusEnum.RUNNING)
@@ -108,6 +114,7 @@ export const StopwatchScreen: React.SFC = (): JSX.Element => {
 
   const stopTimer = () => {
     setStatus(StatusEnum.STOPPED)
+    setStart(0)
   };
 
   const resumeTimer = ()=>{
@@ -116,25 +123,8 @@ export const StopwatchScreen: React.SFC = (): JSX.Element => {
   
   const resetTimer = () => {
     setStatus(StatusEnum.STOPPED)
+    setStart(0)
     setIntervalsByLap([]);
-  };
-
-  const onLapButtonClick = () => {
-    if (status === StatusEnum.RUNNING) {
-      createLap()
-    } else if (status === StatusEnum.STOPPED) {
-      resetTimer()
-    }
-  };
-
-  const onRunButtonClick = () => {
-    if (status === StatusEnum.STOPPED) {
-      setStatus(StatusEnum.RUNNING);
-      startTimer();
-    } else {
-      setStatus(StatusEnum.STOPPED);
-      stopTimer();
-    }
   };
 
   const timeElapsed = now - start;

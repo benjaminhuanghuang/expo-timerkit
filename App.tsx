@@ -27,47 +27,46 @@ const BottomTabs = createBottomTabNavigator();
 export default function App() {
   const createRootBottomTabs = () => {
     return (
-      <BottomTabs.Navigator tabBarOptions={
-        { 
+      <BottomTabs.Navigator
+        tabBarOptions={{
           activeTintColor: COLORS.ACTIVE_ICON_COLOR,
-          style: { 
+          style: {
             height: 95,
             backgroundColor: COLORS.BACKGROUND_COLOR
           },
-          labelStyle:
-          {
+          labelStyle: {
             // style of the font in bottom tab
-            fontSize:12,
-            fontWeight:"bold"
-          },
-        }
-      }>
-        {/* <BottomTabs.Screen
+            fontSize: 12,
+            fontWeight: "bold"
+          }
+        }}
+      >
+        <BottomTabs.Screen
           name="timers"
           component={TimersScreen}
           options={{
             tabBarLabel: "Timers",
-            tabBarIcon: ({color}) => (
+            tabBarIcon: ({ color }) => (
               <Ionicons size={25} color={color} name="md-folder" />
             )
           }}
         />
-         <BottomTabs.Screen
+        <BottomTabs.Screen
           name="countdown"
           component={CountdownScreen}
           options={{
             tabBarLabel: "Countdown",
-            tabBarIcon: ({color}) => (
+            tabBarIcon: ({ color }) => (
               <Ionicons color={color} size={25} name="ios-hourglass" />
             )
           }}
-        /> */}
-          <BottomTabs.Screen
+        />
+        <BottomTabs.Screen
           name="stopwatch"
           component={StopwatchScreen}
           options={{
             tabBarLabel: "Stopwatch",
-            tabBarIcon: ({color}) => (
+            tabBarIcon: ({ color }) => (
               <Ionicons color={color} size={25} name="md-stopwatch" />
             )
           }}
@@ -77,7 +76,7 @@ export default function App() {
           component={SupportScreen}
           options={{
             tabBarLabel: "Support",
-            tabBarIcon: ({color}) => (
+            tabBarIcon: ({ color }) => (
               <Ionicons color={color} size={25} name="ios-call" />
             )
           }}
@@ -87,7 +86,7 @@ export default function App() {
           component={SettingsScreen}
           options={{
             tabBarLabel: "Settings",
-            tabBarIcon: ({color}) => (
+            tabBarIcon: ({ color }) => (
               <Ionicons color={color} size={25} name="ios-settings" />
             )
           }}
