@@ -114,16 +114,23 @@ export const StopwatchScreen: React.SFC = (): JSX.Element => {
 
   const stopTimer = () => {
     setStatus(StatusEnum.STOPPED)
+    const [firstLap, ...other] = intervalsByLap;
+    setIntervalsByLap([firstLap + now - start, ...other]);
+    setNow(0);
     setStart(0)
   };
 
   const resumeTimer = ()=>{
+    const now = new Date().getTime();
+    setNow(now);
+    setStart(now);
     setStatus(StatusEnum.RUNNING)
   }
   
   const resetTimer = () => {
     setStatus(StatusEnum.STOPPED)
     setStart(0)
+    setNow(0);
     setIntervalsByLap([]);
   };
 
