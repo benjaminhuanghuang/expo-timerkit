@@ -18,22 +18,25 @@ export const RoundButton: React.SFC<RoundButtonProps> = ({
   onPress,
   disabled = false
 }): JSX.Element => {
-  const buttonStyle = {
+  const buttonShap = {
     width: diameter,
     height: diameter,
-    borderRadius: Math.floor(diameter/2)
+    borderRadius: Math.floor(diameter / 2)
+  };
+
+  const buttonBorderShap = {
+    width: diameter - 4,
+    height: diameter - 4,
+    borderRadius: Math.floor((diameter - 4) / 2)
   };
   return (
     <TouchableOpacity
       onPress={() => !disabled && onPress()}
-      style={[styles.buttonContainer, buttonStyle]}
+      style={[styles.buttonContainer, buttonShap, { backgroundColor }]}
       activeOpacity={disabled ? 1 : 0.7}
     >
       <View
-        style={[
-          buttonStyle,
-          { backgroundColor, justifyContent: "center", alignItems: "center" }
-        ]}
+        style={[styles.buttonBorder, buttonBorderShap, { backgroundColor }]}
       >
         <Text style={[styles.buttonTitle, { color }]}>{title}</Text>
       </View>
@@ -43,13 +46,17 @@ export const RoundButton: React.SFC<RoundButtonProps> = ({
 
 const styles = StyleSheet.create({
   buttonContainer: {
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  buttonBorder: {
     borderWidth: 2,
     justifyContent: "center",
     alignItems: "center"
   },
   buttonTitle: {
-    fontSize: 20,
-    fontWeight: "bold"
+    fontSize: 18,
+    // fontWeight: "bold"
   }
 });
 

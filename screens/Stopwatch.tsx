@@ -10,15 +10,12 @@ enum StatusEnum {
   RUNNING
 }
 
-
-
 interface LapProps {
   number: number;
   interval: number;
   isFastest: boolean;
   isSlowest: boolean;
 }
-
 
 class Lap implements LapProps {
   number: number;
@@ -27,7 +24,12 @@ class Lap implements LapProps {
   isSlowest: boolean;
 }
 
-const LapItem: React.SFC<LapProps> = ({ number, interval, isFastest , isSlowest}) => {
+const LapItem: React.SFC<LapProps> = ({
+  number,
+  interval,
+  isFastest,
+  isSlowest
+}) => {
   const lapTextStyle = [
     styles.lapText,
     isFastest && styles.fastest,
@@ -81,23 +83,27 @@ const LapsTable: React.SFC<LapsTableProps> = ({ laps, timer }) => {
 export const StopwatchScreen: React.SFC = (): JSX.Element => {
   const [now, setNow] = useState(0);
   const [start, setStart] = useState(new Date().getTime());
-  // The elapsed time since start 
+  // The elapsed time since start
   const [elapsedTime, setElapsedTime] = useState(0);
   const [timerFunction, setTimerFunction] = useState(0);
 
   const [status, setStatus] = useState(StatusEnum.STOPPED);
-  const elapsedTimeWhenLap: number[]=[];
-  
+  const elapsedTimeWhenLap: number[] = [];
+
   useEffect(() => {
     return () => clearInterval(timerFunction);
   }, []);
-  
+
   const lapButtonTitle = status === StatusEnum.RUNNING ? "Lap" : "Reset";
   const runButtonTitle = status === StatusEnum.RUNNING ? "Stop" : "Start";
+  const runButtonColor =
+    status === StatusEnum.RUNNING
+      ? "#FFFFFF"
+      : "#50D167";
   const runButtonBGColor =
     status === StatusEnum.RUNNING
       ? COLORS.BUTTON_BACKGROUND_RED
-      : COLORS.BUTTON_BACKGROUND_GEEEN;
+      : "#1B361F";
 
   const onLapButtonClick = () => {
     if (status === StatusEnum.RUNNING) {
@@ -114,38 +120,34 @@ export const StopwatchScreen: React.SFC = (): JSX.Element => {
   };
 
   const createLap = () => {};
-  
-  const reset= ()=> {
-    elapsedTimeWhenLap= [],
-    start: 0,
-    now: 0,
-  }
+
+  // const reset= ()=> {
+  //   elapsedTimeWhenLap= [],
+  //   start: 0,
+  //   now: 0,
+  // }
 
   return (
     <View style={globalStyles.screenContainer}>
-      <DigitalTimer interval={elapsedTimeWhenLap.reduce((total, curr) => total + curr, 0) + timer}
+      <DigitalTimer elapsedTime={12345}
           style={styles.timer}/>
       <RowContainer height={140}>
         <RoundButton
           color={COLORS.FRONTGROUND_COLOR}
           backgroundColor={COLORS.FRONTGROUND_COLOR_GRAY}
-          width={180}
-          height={80}
-          borderRadius={10}
+          diameter={80}
           onPress={onLapButtonClick}
           title={lapButtonTitle}
         />
         <RoundButton
-          color={COLORS.FRONTGROUND_COLOR}
+          color={runButtonColor}
           backgroundColor={runButtonBGColor}
-          width={180}
-          height={80}
-          borderRadius={10}
+          diameter={80}
           onPress={onRunButtonClick}
           title={runButtonTitle}
         />
       </RowContainer>
-      <LapsTable laps={laps} timer={timer}/>
+      <LapsTable laps={[]} timer={12345}/>
     </View>
   );
 };
@@ -168,10 +170,10 @@ const styles = StyleSheet.create({
   },
 
   timer: {
-    color: '#FFFFFF',
+    color: "#FFFFFF",
     fontSize: 76,
-    fontWeight: '200',
-    width: 110,
+    fontWeight: "200",
+    width: 110
   },
 
   scrollView: {
