@@ -1,8 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
-interface RoundButtonProps {
-  diameter: number;
+interface ButtonProps {
+  width: number;
+  height: number;
+  borderRadius?: number;
   title: string;
   color?: string;
   backgroundColor?: string;
@@ -10,8 +12,10 @@ interface RoundButtonProps {
   disabled?: boolean;
 }
 
-export const RoundButton: React.SFC<RoundButtonProps> = ({
-  diameter,
+export const Button: React.SFC<ButtonProps> = ({
+  width,
+  height,
+  borderRadius = 0,
   title,
   color,
   backgroundColor,
@@ -19,9 +23,9 @@ export const RoundButton: React.SFC<RoundButtonProps> = ({
   disabled = false
 }): JSX.Element => {
   const buttonStyle = {
-    width: diameter,
-    height: diameter,
-    borderRadius: Math.floor(diameter/2)
+    width,
+    height,
+    borderRadius
   };
   return (
     <TouchableOpacity
