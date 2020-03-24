@@ -6,7 +6,7 @@ interface RoundButtonProps {
   title: string;
   color?: string;
   backgroundColor?: string;
-  onPress: any;
+  onPress?: any;
   disabled?: boolean;
 }
 

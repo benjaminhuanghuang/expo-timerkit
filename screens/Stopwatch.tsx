@@ -7,7 +7,7 @@ import { RowContainer, RoundButton, DigitalTimer } from "../components";
 
 enum StatusEnum {
   STOPPED,
-  RUNNING
+  RUNNING,
 }
 
 interface LapProps {
@@ -30,29 +30,26 @@ const LapItem: React.SFC<LapProps> = ({
   isFastest,
   isSlowest
 }) => {
-  const lapTextStyle = [
-    styles.lapText,
+  const lapDigitsStyle = [
+    styles.lapDigits,
     isFastest && styles.fastest,
     isSlowest && styles.slowest
   ];
 
   return (
     <View style={styles.lap}>
-      <Text style={lapTextStyle}>Lap {number}</Text>
-      <DigitalTimer
-        style={lapTextStyle}
-        timeElapsed={interval}
-      />
+      <Text style={styles.lapLabel}>Lap {number}</Text>
+      <DigitalTimer style={lapDigitsStyle} timeElapsed={interval} />
     </View>
   );
 };
 
 interface LapsTableProps {
   laps: number[];
-  timer: any;
+  timeElapsed: number;
 }
 
-const LapsTable: React.SFC<LapsTableProps> = ({ laps, timer }) => {
+const LapsTable: React.SFC<LapsTableProps> = ({ laps, timeElapsed }) => {
   const finishedLaps = laps.slice(1); // copy [1...]
   let min = Number.MAX_SAFE_INTEGER;
   let max = Number.MIN_SAFE_INTEGER;
@@ -71,7 +68,7 @@ const LapsTable: React.SFC<LapsTableProps> = ({ laps, timer }) => {
         <LapItem
           key={index}
           number={laps.length - index}
-          interval={index === 0 ? timer + lap : lap}
+          interval={index === 0 ? timeElapsed + lap : lap}
           isSlowest={lap === max}
           isFastest={lap === min}
         />
@@ -81,70 +78,97 @@ const LapsTable: React.SFC<LapsTableProps> = ({ laps, timer }) => {
 };
 
 export const StopwatchScreen: React.SFC = (): JSX.Element => {
-  const [now, setNow] = useState(0);
-  const [start, setStart] = useState(new Date().getTime());
-  // The elapsed time since start
-  const [elapsedTime, setElapsedTime] = useState(0);
-  const [timerFunction, setTimerFunction] = useState(0);
-
   const [status, setStatus] = useState(StatusEnum.STOPPED);
-  const intervalsByLap: number[] = [1000,2000,3000];
+  // current time
+  const [now, setNow] = useState(0);
+  // time ticks when click the start button
+  const [start, setStart] = useState(0);
+  // laps displayd in the table, newest one is the fist one in the array
+  const [intervalsByLap, setIntervalsByLap] = useState([]);
 
   useEffect(() => {
-    return () => clearInterval(timerFunction);
-  }, []);
+    const interval = setInterval(() => {
+      if (status === StatusEnum.RUNNING) {
+        const now = new Date().getTime();
+        setNow(now);
+      }
+    }, 100);
+    return () => clearInterval(interval);
+  }, [now]);
 
-  const lapButtonTitle = status === StatusEnum.RUNNING ? "Lap" : "Reset";
-  const runButtonTitle = status === StatusEnum.RUNNING ? "Stop" : "Start";
-  const runButtonColor = status === StatusEnum.RUNNING ? "#FFFFFF" : "#50D167";
-  const runButtonBGColor =
-    status === StatusEnum.RUNNING ? COLORS.BUTTON_BACKGROUND_RED : "#1B361F";
+  const createLap = () => {};
+
+  const startTimer = () => {
+    setStatus(StatusEnum.RUNNING)
+    const now = new Date().getTime();
+    setNow(now);
+    setStart(now);
+    setIntervalsByLap([0]);
+  };
+
+  const stopTimer = () => {
+    setStatus(StatusEnum.STOPPED)
+  };
+
+  const resumeTimer = ()=>{
+    setStatus(StatusEnum.RUNNING)
+  }
+  
+  const resetTimer = () => {
+    setStatus(StatusEnum.STOPPED)
+    setIntervalsByLap([]);
+  };
 
   const onLapButtonClick = () => {
     if (status === StatusEnum.RUNNING) {
-      createLap();
+      createLap()
+    } else if (status === StatusEnum.STOPPED) {
+      resetTimer()
     }
   };
 
   const onRunButtonClick = () => {
     if (status === StatusEnum.STOPPED) {
       setStatus(StatusEnum.RUNNING);
+      startTimer();
     } else {
       setStatus(StatusEnum.STOPPED);
+      stopTimer();
     }
   };
 
-  const createLap = () => {};
-
-  // const reset= ()=> {
-  //   elapsedTimeWhenLap= [],
-  //   start: 0,
-  //   now: 0,
-  // }
-
+  const timeElapsed = now - start;
   return (
     <View style={globalStyles.screenContainer}>
-      <RowContainer height={240}>
-        <DigitalTimer timeElapsed={12345} style={styles.timer} />
+      <RowContainer height={200}>
+        <DigitalTimer timeElapsed={timeElapsed} style={styles.bigTimer} />
       </RowContainer>
 
-      <RowContainer height={80}>
-        <RoundButton
-          color={COLORS.FRONTGROUND_COLOR}
-          backgroundColor={COLORS.FRONTGROUND_COLOR_GRAY}
-          diameter={80}
-          onPress={onLapButtonClick}
-          title={lapButtonTitle}
-        />
-        <RoundButton
-          color={runButtonColor}
-          backgroundColor={runButtonBGColor}
-          diameter={80}
-          onPress={onRunButtonClick}
-          title={runButtonTitle}
-        />
-      </RowContainer>
-      <LapsTable laps={intervalsByLap} timer={12345} />
+      {intervalsByLap.length === 0 &&
+          <RowContainer height={80}>
+            <RoundButton diameter={80} title="Lap" color="#8B8B90" backgroundColor="#151515"
+              disabled />
+            <RoundButton diameter={80}title="Start" color="#50D167" backgroundColor="#1B361F"
+              onPress={startTimer} />
+          </RowContainer>
+        }
+        {start > 0 &&
+          <RowContainer>
+            <RoundButton  diameter={80} title="Lap" color="#FFFFFF" backgroundColor="#3D3D3D"
+              onPress={createLap} />
+            <RoundButton  diameter={80} title="Stop" color="#E33935" backgroundColor="#3C1715"
+              onPress={stopTimer} />
+          </RowContainer>
+        }
+        {intervalsByLap.length > 0 && start === 0 &&
+          <RowContainer>
+            <RoundButton  diameter={80} title="Reset" color="#FFFFFF" backgroundColor="#3D3D3D"
+              onPress={resetTimer} />
+            <RoundButton  diameter={80} title="Resume" color="#50D167" backgroundColor="#1B361F"
+              onPress={resumeTimer} />
+          </RowContainer>
+        }
+      <LapsTable laps={intervalsByLap} timeElapsed={timeElapsed} />
     </View>
   );
 };
@@ -154,19 +178,25 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    borderColor: "#151515",
+    borderColor: COLORS.FRONTGROUND_COLOR_GRAY,
     borderTopWidth: 1,
     paddingVertical: 10
   },
-  lapText: {
+  lapLabel: {
     color: "#FFFFFF",
     fontSize: 18
   },
 
-  timer: {
+  lapDigits: {
+    color: "#FFFFFF",
+    fontSize: 18,
+    width: 28
+  },
+  bigTimer: {
     color: "#FFFFFF",
     fontSize: 76,
-    fontWeight: "200"
+    fontWeight: "200",
+    width: 110
   },
 
   scrollView: {

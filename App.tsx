@@ -42,7 +42,7 @@ export default function App() {
           },
         }
       }>
-        <BottomTabs.Screen
+        {/* <BottomTabs.Screen
           name="timers"
           component={TimersScreen}
           options={{
@@ -61,7 +61,7 @@ export default function App() {
               <Ionicons color={color} size={25} name="ios-hourglass" />
             )
           }}
-        />
+        /> */}
           <BottomTabs.Screen
           name="stopwatch"
           component={StopwatchScreen}

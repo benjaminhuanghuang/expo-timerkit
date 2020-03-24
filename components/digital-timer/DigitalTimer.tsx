@@ -18,7 +18,22 @@ export const DigitalTimer: React.SFC<DigitalTimerProps> = ({
   const mins = duration.minutes();
   const seconds = duration.seconds();
   const centiseconds = Math.floor(duration.milliseconds() / 10);
-
-  const text = `${pad(mins)}:${pad(seconds)}.${pad(centiseconds)}`;
-  return <Text style={style}>{text}</Text>;
+  // -- This is not good because the position of the digit changes when the number is changing
+  // const text = `${pad(mins)}:${pad(seconds)}.${pad(centiseconds)}`;
+  //return <Text style={style}>{text}</Text>;
+  return (
+    <View style={styles.timerContainer}>
+    <Text style={style}>{pad(mins)}:</Text>
+    <Text style={style}>{pad(seconds)}.</Text>
+    <Text style={style}>{pad(centiseconds)}</Text>
+  </View>
+  )
 };
+
+const styles = StyleSheet.create({
+  timerContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  }
+})
