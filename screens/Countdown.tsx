@@ -14,7 +14,7 @@ export const CountdownScreen : React.FC= ():  JSX.Element =>{
        <RowContainer height={160}>
         <DigitalTimer timeValue={0} style={styles.digits} />
       </RowContainer>
-      <ScrollView>
+      <ScrollView contentContainerStyle={styles.buttons}>
         <DigitalTimerButton seconds={10} size={180} backgroundColor="#3D3D3D" digitalStyle={styles.buttonDigits}></DigitalTimerButton>
         <DigitalTimerButton seconds={15} size={180} backgroundColor="#3D3D3D" digitalStyle={styles.buttonDigits}></DigitalTimerButton>
         <DigitalTimerButton  seconds={35} size={180} backgroundColor="#3D3D3D" digitalStyle={styles.buttonDigits}></DigitalTimerButton>
@@ -25,6 +25,12 @@ export const CountdownScreen : React.FC= ():  JSX.Element =>{
 }
 
 const styles = StyleSheet.create({
+  buttons:{
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    flexWrap: "wrap"
+  },
   button: {
     flexDirection: "row",
     justifyContent: "center",
