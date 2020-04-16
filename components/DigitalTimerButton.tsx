@@ -3,25 +3,35 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 
 //
 import { DigitalTimer } from "./digital-timer/DigitalTimer";
+import { globalStyles, COLORS } from "../globalStyles";
 
 interface DigitalTimerButtonProps {
   size: number;
   seconds: number; // number of seconds
-  backgroundColor?: string;
+  color?: string;
+  pushedColor?: string;
   digitalStyle?: any;
+  disabled: boolean;
   onChange?: (duration: number, count: number, isLast: boolean) => void;
+  stop?:()=>void
 }
 
 export const DigitalTimerButton: React.FC<DigitalTimerButtonProps> = ({
   size,
   seconds, // number of seconds
-  backgroundColor,
+  color = COLORS.BUTTON_BACKGROUND_GREY,
+  pushedColor = COLORS.BUTTON_BACKGROUND_GEEEN,
   digitalStyle,
+  disabled = false,
 }): JSX.Element => {
   const [buttonRunning, setButtonRunning] = useState(false);
 
   const toggleButton = () => {
     setButtonRunning(!buttonRunning);
+  };
+
+  const onPress = () => {
+    toggleButton();
   };
 
   const buttonShap = {
@@ -32,9 +42,9 @@ export const DigitalTimerButton: React.FC<DigitalTimerButtonProps> = ({
 
   return (
     <TouchableOpacity
-      onPress={() => toggleButton()}
-      style={[styles.button, buttonShap, { backgroundColor }]}
-      activeOpacity={buttonRunning ? 1 : 0.7}
+      onPress={() => !disabled && onPress()}
+      style={[styles.button, buttonShap, { backgroundColor: buttonRunning ? pushedColor : color }]}
+      activeOpacity={0.7}
     >
       <DigitalTimer timeValue={seconds * 1000} style={digitalStyle} showMilliSecond={false} />
     </TouchableOpacity>

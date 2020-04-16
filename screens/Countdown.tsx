@@ -1,50 +1,83 @@
-import React, { useState} from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
-import { RowContainer, DigitalTimer, DigitalTimerButton} from "../components";
+import React, { useState } from "react";
+import { View, ScrollView, StyleSheet } from "react-native";
+import { RowContainer, DigitalTimer, DigitalTimerButton } from "../components";
 
-import { globalStyles } from '../globalStyles';
+import { globalStyles } from "../globalStyles";
 
- 
-export const CountdownScreen : React.FC= ():  JSX.Element =>{
-  const  onTimerChange = (duration: number, count: number, isLast: boolean)=>{
+interface ButtonData {
+  seconds: number;
+  disabled: boolean;
+}
+export const CountdownScreen: React.FC = (): JSX.Element => {
+  let buttonsData: Array<ButtonData> = [
+    {
+      seconds: 10,
+      disabled: false,
+    },
+    {
+      seconds: 15,
+      disabled: false,
+    },
+    {
+      seconds: 20,
+      disabled: false,
+    },
+    {
+      seconds: 30,
+      disabled: false,
+    },
+    {
+      seconds: 45,
+      disabled: false,
+    },
+    {
+      seconds: 60,
+      disabled: false,
+    },
+  ];
 
-  }
+  const onTimerChange = (duration: number, count: number, isLast: boolean) => {};
+  
   return (
     <View style={globalStyles.screenContainer}>
-       <RowContainer height={160}>
+      <RowContainer height={160}>
         <DigitalTimer timeValue={0} style={styles.digits} />
       </RowContainer>
       <ScrollView contentContainerStyle={styles.buttons}>
-        <DigitalTimerButton seconds={10} size={180} backgroundColor="#3D3D3D" digitalStyle={styles.buttonDigits}></DigitalTimerButton>
-        <DigitalTimerButton seconds={15} size={180} backgroundColor="#3D3D3D" digitalStyle={styles.buttonDigits}></DigitalTimerButton>
-        <DigitalTimerButton  seconds={35} size={180} backgroundColor="#3D3D3D" digitalStyle={styles.buttonDigits}></DigitalTimerButton>
-        <DigitalTimerButton seconds={45} size={180} backgroundColor="#3D3D3D" digitalStyle={styles.buttonDigits}></DigitalTimerButton>
+        {buttonsData.map((button: ButtonData, index) => {
+          return (
+            <DigitalTimerButton
+              seconds={button.seconds}
+              disabled={button.disabled}
+              size={180}
+              digitalStyle={styles.buttonDigits}
+            />
+          );
+        })}
       </ScrollView>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
-  buttons:{
+  buttons: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   button: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
   },
-  buttonPushed:{
-
-  },
+  buttonPushed: {},
   digits: {
     color: "#FFFFFF",
     fontSize: 76,
     fontWeight: "200",
     width: 100,
-    textAlign: "center"
+    textAlign: "center",
   },
   buttonDigits: {
     color: "#FFFFFF",
