@@ -1,4 +1,4 @@
-
+## React Native support style array
 ```
 const lapDigitsStyle = [
     styles.lapDigits,
@@ -9,7 +9,22 @@ const lapDigitsStyle = [
 
 
 
-Use classnames
+## Use classnames 
 ```
  <span className={classnames("nav-prev", {"nav-disabled": isPrevDisabled})}
+```
+
+
+## Ues Object.assign
+```
+let lapDigitsStyle = {...styles.lapDigits};
+
+if (isFastest)
+{
+  Object.assign(lapDigitsStyle, styles.fastest)
+}
+if (isSlowest)
+{
+  Object.assign(lapDigitsStyle, styles.slowest)
+}
 ```
