@@ -8,7 +8,7 @@ interface FieldVerticalProps{
   multiLine: Boolean;
   color: string
 }
-export const FieldVertical:React.SFC<FieldVerticalProps> = ({ label, value, multiLine, color })=> {
+export const FieldVertical:React.FC<FieldVerticalProps> = ({ label, value, multiLine, color })=> {
 
   const renderLabel = (label, multiLine, color)=> {
     if (multiLine) {

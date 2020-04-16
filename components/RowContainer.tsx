@@ -6,7 +6,7 @@ interface RowContainerProps {
     height?:number
 }
 
-export const RowContainer: React.SFC<RowContainerProps> = ({ children, height }) : JSX.Element=> {
+export const RowContainer: React.FC<RowContainerProps> = ({ children, height }) : JSX.Element=> {
   return <View style={[styles.rowContainer, {height}]}>{children}</View>
 };
 

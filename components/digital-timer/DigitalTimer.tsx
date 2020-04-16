@@ -8,7 +8,7 @@ export interface DigitalTimerProps {
   style: any;
 }
 
-export const DigitalTimer: React.SFC<DigitalTimerProps> = ({
+export const DigitalTimer: React.FC<DigitalTimerProps> = ({
   timeElapsed,
   style
 }): JSX.Element => {

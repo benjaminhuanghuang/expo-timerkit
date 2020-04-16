@@ -10,7 +10,7 @@ interface RoundButtonProps {
   disabled?: boolean;
 }
 
-export const RoundButton: React.SFC<RoundButtonProps> = ({
+export const RoundButton: React.FC<RoundButtonProps> = ({
   diameter,
   title,
   color,

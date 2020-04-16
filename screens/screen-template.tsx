@@ -7,7 +7,7 @@ import { globalStyles } from '../globalStyles';
 export interface TemplateScreenProps {
 
 }
-export const TemplateScreen :React.SFC<TemplateScreenProps> = ():  JSX.Element =>{
+export const TemplateScreen :React.FC<TemplateScreenProps> = ():  JSX.Element =>{
   return (
     <>
       <Text style = {globalStyles.h3}>Feed</Text>

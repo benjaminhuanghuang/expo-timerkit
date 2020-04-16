@@ -24,7 +24,7 @@ class Lap implements LapProps {
   isSlowest: boolean;
 }
 
-const LapItem: React.SFC<LapProps> = ({
+const LapItem: React.FC<LapProps> = ({
   number,
   interval,
   isFastest,
@@ -49,7 +49,7 @@ interface LapsTableProps {
   timeElapsed: number;
 }
 
-const LapsTable: React.SFC<LapsTableProps> = ({ laps, timeElapsed }) => {
+const LapsTable: React.FC<LapsTableProps> = ({ laps, timeElapsed }) => {
   const finishedLaps = laps.slice(1); // copy [1...]
   let min = Number.MAX_SAFE_INTEGER;
   let max = Number.MIN_SAFE_INTEGER;
@@ -77,7 +77,7 @@ const LapsTable: React.SFC<LapsTableProps> = ({ laps, timeElapsed }) => {
   );
 };
 
-export const StopwatchScreen: React.SFC = (): JSX.Element => {
+export const StopwatchScreen: React.FC = (): JSX.Element => {
   const [status, setStatus] = useState(StatusEnum.STOPPED);
   // current time
   const [now, setNow] = useState(0);

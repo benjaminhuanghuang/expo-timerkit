@@ -7,7 +7,7 @@ interface FieldHorizontalProps {
   color: string;
 }
 
-export const Fieldhorizontal: React.SFC<FieldHorizontalProps> = ({
+export const Fieldhorizontal: React.FC<FieldHorizontalProps> = ({
   label,
   value,
   color

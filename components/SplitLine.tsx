@@ -5,7 +5,7 @@ import { View} from "react-native";
 import {COLORS } from "../globalStyles";
 
 
-export const SplitLine: React.SFC = (): JSX.Element => {
+export const SplitLine: React.FC = (): JSX.Element => {
   return (
     <View style={{
       marginTop:20,

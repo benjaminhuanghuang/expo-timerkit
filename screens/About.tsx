@@ -3,7 +3,7 @@ import { View, Text, Button, Platform, TouchableOpacity } from "react-native";
 
 import { globalStyles } from "../globalStyles";
 
-export const AboutScreen: React.SFC = (): JSX.Element => {
+export const AboutScreen: React.FC = (): JSX.Element => {
   return (
     <>
       <Text style={globalStyles.h3}>About...</Text>

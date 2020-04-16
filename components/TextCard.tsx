@@ -11,7 +11,7 @@ export interface TextCardProps {
   needReadMore?: boolean
 }
 
-export const TextCard: React.SFC<TextCardProps> = ({
+export const TextCard: React.FC<TextCardProps> = ({
   title,
   content,
   needReadMore,

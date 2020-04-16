@@ -7,7 +7,7 @@ import { globalStyles, COLORS } from '../globalStyles';
 export interface ComponentTemplateProps {
 
 }
-export const ComponentTemplate :React.SFC<ComponentTemplateProps> = ():  JSX.Element =>{
+export const ComponentTemplate :React.FC<ComponentTemplateProps> = ():  JSX.Element =>{
   return (
     <View style={globalStyles.screenContainer}>
       <Text style = {globalStyles.h3}>Feed</Text>

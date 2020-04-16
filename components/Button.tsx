@@ -12,7 +12,7 @@ interface ButtonProps {
   disabled?: boolean;
 }
 
-export const Button: React.SFC<ButtonProps> = ({
+export const Button: React.FC<ButtonProps> = ({
   width,
   height,
   borderRadius = 0,
