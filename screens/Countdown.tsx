@@ -11,14 +11,14 @@ export const CountdownScreen : React.FC= ():  JSX.Element =>{
   }
   return (
     <View style={globalStyles.screenContainer}>
-       <RowContainer height={200}>
-        <DigitalTimer timeElapsed={0} style={styles.digits} />
+       <RowContainer height={160}>
+        <DigitalTimer timeValue={0} style={styles.digits} />
       </RowContainer>
       <ScrollView>
-        <DigitalTimerButton duration={10} size={180} backgroundColor="#3D3D3D" digitalStyle={styles.buttonDigits}></DigitalTimerButton>
-        <DigitalTimerButton duration={15} size={180} backgroundColor="#3D3D3D" digitalStyle={styles.buttonDigits}></DigitalTimerButton>
-        <DigitalTimerButton  duration={35} size={180} backgroundColor="#3D3D3D" digitalStyle={styles.buttonDigits}></DigitalTimerButton>
-        <DigitalTimerButton duration={45} size={180} backgroundColor="#3D3D3D" digitalStyle={styles.buttonDigits}></DigitalTimerButton>
+        <DigitalTimerButton seconds={10} size={180} backgroundColor="#3D3D3D" digitalStyle={styles.buttonDigits}></DigitalTimerButton>
+        <DigitalTimerButton seconds={15} size={180} backgroundColor="#3D3D3D" digitalStyle={styles.buttonDigits}></DigitalTimerButton>
+        <DigitalTimerButton  seconds={35} size={180} backgroundColor="#3D3D3D" digitalStyle={styles.buttonDigits}></DigitalTimerButton>
+        <DigitalTimerButton seconds={45} size={180} backgroundColor="#3D3D3D" digitalStyle={styles.buttonDigits}></DigitalTimerButton>
       </ScrollView>
     </View>
   )
@@ -37,11 +37,12 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontSize: 76,
     fontWeight: "200",
-    width: 110,
+    width: 100,
+    textAlign: "center"
   },
   buttonDigits: {
     color: "#FFFFFF",
-    fontSize: 10,
-    width: 40,
+    fontSize: 40,
+    width: 53,
   },
 });

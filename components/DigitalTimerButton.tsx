@@ -6,17 +6,17 @@ import { DigitalTimer } from "./digital-timer/DigitalTimer";
 
 interface DigitalTimerButtonProps {
   size: number;
-  duration: number;
+  seconds: number; // number of seconds
   backgroundColor?: string;
-  digitalStyle?: any
+  digitalStyle?: any;
   onChange?: (duration: number, count: number, isLast: boolean) => void;
 }
 
 export const DigitalTimerButton: React.FC<DigitalTimerButtonProps> = ({
   size,
-  duration,
+  seconds, // number of seconds
   backgroundColor,
-  digitalStyle
+  digitalStyle,
 }): JSX.Element => {
   const [buttonRunning, setButtonRunning] = useState(false);
 
@@ -36,16 +36,16 @@ export const DigitalTimerButton: React.FC<DigitalTimerButtonProps> = ({
       style={[styles.button, buttonShap, { backgroundColor }]}
       activeOpacity={buttonRunning ? 1 : 0.7}
     >
-      <DigitalTimer timeElapsed={duration} style={digitalStyle}/>
+      <DigitalTimer timeValue={seconds * 1000} style={digitalStyle} showMilliSecond={false} />
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   button: {
-    margin:5,
+    margin: 5,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-  }
+  },
 });

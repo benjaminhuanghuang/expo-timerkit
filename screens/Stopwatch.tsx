@@ -5,6 +5,8 @@ import { globalStyles, COLORS } from "../globalStyles";
 
 import { RowContainer, RoundButton, DigitalTimer } from "../components";
 
+import classnames from 'classnames'
+
 enum StatusEnum {
   STOPPED,
   RUNNING,
@@ -30,16 +32,26 @@ const LapItem: React.FC<LapProps> = ({
   isFastest,
   isSlowest
 }) => {
+  /* lapDigitsStyle is an array, DigitalTimer can not handle it
   const lapDigitsStyle = [
     styles.lapDigits,
     isFastest && styles.fastest,
     isSlowest && styles.slowest
   ];
-
+  */ 
+  let lapDigitsStyle = {...styles.lapDigits};
+  if (isFastest)
+  {
+    Object.assign(lapDigitsStyle, styles.fastest)
+  }
+  if (isSlowest)
+  {
+    Object.assign(lapDigitsStyle, styles.slowest)
+  }
   return (
     <View style={styles.lap}>
       <Text style={styles.lapLabel}>Lap {number}</Text>
-      <DigitalTimer style={lapDigitsStyle} timeElapsed={interval} />
+      <DigitalTimer style={lapDigitsStyle} timeValue={interval} />
     </View>
   );
 };
@@ -138,7 +150,7 @@ export const StopwatchScreen: React.FC = (): JSX.Element => {
   return (
     <View style={globalStyles.screenContainer}>
       <RowContainer height={200}>
-        <DigitalTimer timeElapsed={timeElapsed} style={styles.bigTimer} />
+        <DigitalTimer timeValue={timeElapsed} style={styles.bigTimer} />
       </RowContainer>
 
       {intervalsByLap.length === 0 &&
@@ -187,15 +199,15 @@ const styles = StyleSheet.create({
   lapDigits: {
     color: "#FFFFFF",
     fontSize: 18,
-    width: 28
+    width: 25
   },
   bigTimer: {
     color: "#FFFFFF",
     fontSize: 76,
     fontWeight: "200",
-    width: 110
+    width: 100,
+    textAlign: "center"
   },
-
   scrollView: {
     marginTop: 40,
     alignSelf: "stretch"
