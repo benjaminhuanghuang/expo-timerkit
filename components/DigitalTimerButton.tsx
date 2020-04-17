@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 
 //
@@ -32,11 +32,36 @@ export const DigitalTimerButton: React.FC<DigitalTimerButtonProps> = ({
   onToggle,
   onUnToggle,
 }): JSX.Element => {
+  // current time
+  const [now, setNow] = useState(0);
+  // record the start
+  const [start, setStart] = useState(0);
+
+  const timeElapsed = now - start;
+  const rest = seconds * 1000 - timeElapsed;
+
+  const secondsToShow = toggled ? rest : seconds * 1000;
+  //
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (toggled) {
+        const now = new Date().getTime();
+        setNow(now);
+      }
+    }, 100);
+    return () => clearInterval(interval);
+  }, [now]);
+
   const onPress = (id: number) => {
     if (toggled) {
       onUnToggle(id);
+      setNow(0);
+      setStart(0);
     } else {
       onToggle(id);
+      const now = new Date().getTime();
+      setStart(now);
+      setNow(now);
     }
   };
 
@@ -51,7 +76,7 @@ export const DigitalTimerButton: React.FC<DigitalTimerButtonProps> = ({
       style={[styles.button, buttonShap, { backgroundColor: toggled ? pushedColor : color }]}
       activeOpacity={0.7}
     >
-      <DigitalTimer timeValue={seconds * 1000} style={digitalStyle} showMilliSecond={false} />
+      <DigitalTimer timeValue={secondsToShow} style={digitalStyle} showMilliSecond={false} />
     </TouchableOpacity>
   );
 };
