@@ -16,7 +16,7 @@ interface DigitalTimerButtonProps {
   toggled: boolean;
   onToggle: (key: number) => void;
   onUnToggle: (key: number) => void;
-  onChange?: (duration: number, count: number, isLast: boolean) => void;
+  onTimerRunning?: (seconds: number, restTime: number) => void;
   stop?: () => void;
 }
 
@@ -31,6 +31,7 @@ export const DigitalTimerButton: React.FC<DigitalTimerButtonProps> = ({
   toggled,
   onToggle,
   onUnToggle,
+  onTimerRunning
 }): JSX.Element => {
   // current time
   const [now, setNow] = useState(0);
@@ -38,15 +39,22 @@ export const DigitalTimerButton: React.FC<DigitalTimerButtonProps> = ({
   const [start, setStart] = useState(0);
 
   const timeElapsed = now - start;
-  const rest = seconds * 1000 - timeElapsed;
+  const restTime = seconds * 1000 - timeElapsed;
 
-  const secondsToShow = toggled ? rest : seconds * 1000;
+  const secondsToShow = toggled ? restTime : seconds * 1000;
   //
   useEffect(() => {
     const interval = setInterval(() => {
       if (toggled) {
         const now = new Date().getTime();
+        if ((now - start) >= seconds * 1000)
+        {
+          onUnToggle(id);
+          setNow(0);
+          setStart(0);
+        }
         setNow(now);
+        onTimerRunning(seconds, restTime)  
       }
     }, 100);
     return () => clearInterval(interval);

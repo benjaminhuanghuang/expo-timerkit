@@ -45,11 +45,12 @@ export const CountdownScreen: React.FC = (): JSX.Element => {
 
   const [buttonsData, setButtonData] = useState(initButtonsData);
   const onTimerChange = (duration: number, count: number, isLast: boolean) => {};
+  const [time, setTime] = useState(0);
 
   return (
     <View style={globalStyles.screenContainer}>
       <RowContainer height={160}>
-        <DigitalTimer timeValue={0} style={styles.digits} />
+        <DigitalTimer timeValue={time} style={styles.digits} />
       </RowContainer>
       <ScrollView contentContainerStyle={styles.buttons}>
         {buttonsData.map((button: ButtonData, index) => {
@@ -75,6 +76,10 @@ export const CountdownScreen: React.FC = (): JSX.Element => {
                   return {...data, toggled}
                 })
                 setButtonData(newData)
+                setTime(0)
+              }}
+              onTimerRunning = {(rest, seconds)=>{
+                setTime(rest)
               }}
             />
           );
