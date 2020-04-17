@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
 import { RowContainer, DigitalTimer, DigitalTimerButton } from "../components";
 
-import { globalStyles } from "../globalStyles";
+import { globalStyles, COLORS } from "../globalStyles";
 
 interface ButtonData {
   seconds: number;
@@ -45,9 +45,10 @@ export const CountdownScreen: React.FC = (): JSX.Element => {
 
   const [buttonsData, setButtonData] = useState(initButtonsData);
   const [time, setTime] = useState(0);
+  const [bgColor, setBgColor] = useState(COLORS.BACKGROUND_COLOR);
 
   return (
-    <View style={globalStyles.screenContainer}>
+    <View style={[globalStyles.screenContainer, {backgroundColor:bgColor}]}>
       <RowContainer height={140}>
         <DigitalTimer timeValue={time} style={styles.digits} />
       </RowContainer>
@@ -75,9 +76,24 @@ export const CountdownScreen: React.FC = (): JSX.Element => {
                 })
                 setButtonData(newData)
                 setTime(0)
+                setBgColor(COLORS.BACKGROUND_COLOR)
               }}
               onTimerRunning = {(rest, seconds)=>{
                 setTime(rest)
+                if (rest === 0)
+                {
+                  setBgColor(COLORS.BACKGROUND_COLOR)
+                }
+                else if (rest < 3000)
+                {
+                  if (bgColor === COLORS.BACKGROUND_COLOR)
+                  {
+                    setBgColor("#FFCCFF")
+                  }
+                  else{
+                    setBgColor(COLORS.BACKGROUND_COLOR)
+                  }
+                }
               }}
             />
           );
