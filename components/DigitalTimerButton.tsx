@@ -52,9 +52,12 @@ export const DigitalTimerButton: React.FC<DigitalTimerButtonProps> = ({
           onUnToggle(id);
           setNow(0);
           setStart(0);
+          onTimerRunning(0, seconds) 
         }
-        setNow(now);
-        onTimerRunning(seconds, restTime)  
+        else{
+          setNow(now);
+          onTimerRunning(restTime, seconds) 
+        } 
       }
     }, 100);
     return () => clearInterval(interval);
