@@ -28,7 +28,7 @@ export const CountdownScreen: React.FC = (): JSX.Element => {
       toggled: false,
     },
     {
-      seconds: 30,
+      seconds: 35,
       disabled: false,
       toggled: false,
     },
