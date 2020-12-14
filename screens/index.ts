@@ -1,4 +1,4 @@
-export * from './timer/TimersScreen'
+export * from './timer/TimerScreen'
 export * from './Support'
 export * from './Runner'
 export * from './Countdown'
