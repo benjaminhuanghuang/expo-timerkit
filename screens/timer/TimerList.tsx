@@ -12,8 +12,8 @@ interface TimerListProps{
 export const TimerList: React.FC<TimerListProps> = ({timers}): JSX.Element => {
   return (
     <View style={styles.timerListContainer}>
-        {timers.map((timer:ITimer)=>{
-          return <TimerListItem timer={timer}/>
+        {timers.map((timer:ITimer, i:number)=>{
+          return <TimerListItem key={i} timer={timer}/>
       })}
     </View>
   );
