@@ -64,6 +64,7 @@ export const CountdownScreen: React.FC = (): JSX.Element => {
               disabled={button.disabled}
               toggled={button.toggled}
               id={index}
+              key={index}
               onToggle={(id) => {
                 const newData = buttonsData.map((data, i) => {
                   const toggled = i === id;
