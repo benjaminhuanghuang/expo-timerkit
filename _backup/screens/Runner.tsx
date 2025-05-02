@@ -1,44 +1,50 @@
-import React from 'react'
-import { Button, View, StyleSheet, Text } from 'react-native'
+import React from "react";
+import { Button, View, StyleSheet, Text } from "react-native";
 
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import Ionicons from "react-native-vector-icons/Ionicons";
 //
-import {RowContainer, FieldVertical , RoundButton} from '../components';
+import { RowContainer, FieldVertical, RoundButton } from "../components";
 
-import { parsePlan } from '../Utils.js';
+import { parsePlan } from "../Utils.js";
 
 export class RunnerScreen extends React.Component {
   // Settings for the tab navigation
   static navigationOptions = {
     tabBarIcon: ({ focused, tintColor }) => (
-      <Ionicons name={`ios-body${focused ? '' : '-outline'}`} size={25} color={tintColor} />
+      <Ionicons
+        name={`ios-body${focused ? "" : "-outline"}`}
+        size={25}
+        color={tintColor}
+      />
     ),
-  }
+  };
 
   constructor(props) {
     super(props);
 
     this.state = {
       plan: {
-        name: 'Default Plan',
-        type: 'basic',
+        name: "Default Plan",
+        type: "basic",
         pattern: {
           workout: 60,
           recover: 20,
           sets: 4,
           cycles: 4,
-          cycleRecover: 40
-        }
-      }
+          cycleRecover: 40,
+        },
+      },
     };
   }
 
   start() {
-    this.props.navigation.navigate('Timer', { plan: this.state.plan });
+    this.props.navigation.navigate("Timer", { plan: this.state.plan });
   }
 
   render() {
-    let { workout, recover, sets, cycles, cycleRecover, totalTime } = parsePlan(this.state.plan);
+    let { workout, recover, sets, cycles, cycleRecover, totalTime } = parsePlan(
+      this.state.plan
+    );
 
     return (
       <View style={styles.container}>
@@ -55,31 +61,36 @@ export class RunnerScreen extends React.Component {
         </RowContainer>
 
         <View style={styles.buttonContainer}>
-          <RoundButton style={styles.timerButton} title="Start" color="#E33935" background="#3C1715"
-            onPress={() => this.start()} />
+          <RoundButton
+            style={styles.timerButton}
+            title="Start"
+            color="#E33935"
+            background="#3C1715"
+            onPress={() => this.start()}
+          />
         </View>
       </View>
-    )
+    );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',   //in row
-    justifyContent: 'flex-start',
+    alignItems: "center", //in row
+    justifyContent: "flex-start",
     paddingTop: 40,
     paddingHorizontal: 20,
   },
 
   screenTitle: {
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 30,
-    fontWeight: '300',
+    fontWeight: "300",
   },
 
   buttonContainer: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 200,
-  }
-})
+  },
+});

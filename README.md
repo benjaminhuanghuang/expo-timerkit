@@ -1,6 +1,6 @@
 # HIT(high-intensity interval training) Timer
 
-- Expo + React Native
+- Expo 53 + React Native
 - Typescript
 - Firebase
 
