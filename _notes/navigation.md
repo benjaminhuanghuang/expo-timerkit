@@ -1,10 +1,12 @@
+# Navigation
 
 ## Reference
+
 -[React Navigation Official website](https://reactnavigation.org/versions)
 
-
 ## Install
-```
+
+```sh
   npm install @react-navigation/native
 ```
 
@@ -12,10 +14,6 @@
 
 ## Stack Navigator
 
-
 ## Drawer Navigation
 
-
 ## Pass data
-
-
