@@ -19,7 +19,7 @@ type HIITSetting = {
 };
 
 const hiitPresets: HIITSetting[] = [
-  { id: "1", name: "Beginner HIIT", work: 20, rest: 10, rounds: 4 },
+  { id: "1", name: "Beginner HIIT", work: 30, rest: 30, rounds: 4 },
   { id: "2", name: "Fat Burner", work: 30, rest: 15, rounds: 6 },
   { id: "3", name: "Endurance Boost", work: 40, rest: 20, rounds: 8 },
 ];
