@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { useRouter } from "expo-router";
 import { useLocalSearchParams } from "expo-router";
+
 export default function HIITRunnerScreen() {
   const { work, rest, rounds, name } = useLocalSearchParams();
 

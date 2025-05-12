@@ -21,6 +21,7 @@ export default function CountdownListScreen() {
           styles.item,
           pressed && styles.itemPressed, //
         ]}
+        onPress={() => runCountDown(item)}
       >
         <Text style={styles.text}>{item}</Text>
       </Pressable>
@@ -35,7 +36,15 @@ export default function CountdownListScreen() {
       )}
     </View>
   );
-
+  const runCountDown = (item: string) => {
+    // Navigate to countdown runner with the selected duration
+    router.push({
+      pathname: "/countdown/runner",
+      params: {
+        duration: item,
+      },
+    });
+  };
   const handleCreateCustomDuration = () => {
     router.push({
       pathname: "/countdown/editor",
