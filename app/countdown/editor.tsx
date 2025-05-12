@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import { Picker } from "@react-native-picker/picker";
+import { router } from "expo-router";
 
 export default function CustomCountdownScreen() {
   const [minutes, setMinutes] = useState(0);
@@ -18,41 +19,42 @@ export default function CustomCountdownScreen() {
 
   // Handle Cancel button press
   const handleCancel = () => {
-    // Reset the selections to 0
-    setMinutes(0);
-    setSeconds(0);
-    Alert.alert("Countdown Cancelled", "The countdown has been reset.");
+    router.push("/countdown/list");
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Custom Countdown</Text>
+      {/* Container for both pickers */}
+      <View style={styles.pickersContainer}>
+        {/* Left Column for Minutes Picker */}
+        <View style={styles.column}>
+          <Text style={styles.label}>Minutes</Text>
+          <Picker
+            selectedValue={minutes}
+            onValueChange={(itemValue) => setMinutes(itemValue)}
+            style={styles.picker}
+          >
+            {[...Array(60).keys()].map((minute) => (
+              <Picker.Item key={minute} label={`${minute}`} value={minute} />
+            ))}
+          </Picker>
+        </View>
 
-      {/* Minutes Picker */}
-      <Text style={styles.label}>Minutes</Text>
-      <Picker
-        selectedValue={minutes}
-        onValueChange={(itemValue) => setMinutes(itemValue)}
-        style={styles.picker}
-      >
-        {/* Range of minutes (0 to 59) */}
-        {[...Array(60).keys()].map((minute) => (
-          <Picker.Item key={minute} label={`${minute}`} value={minute} />
-        ))}
-      </Picker>
-
-      {/* Seconds Picker */}
-      <Text style={styles.label}>Seconds</Text>
-      <Picker
-        selectedValue={seconds}
-        onValueChange={(itemValue) => setSeconds(itemValue)}
-        style={styles.picker}
-      >
-        {/* Range of seconds (0 to 59) */}
-        {[...Array(60).keys()].map((second) => (
-          <Picker.Item key={second} label={`${second}`} value={second} />
-        ))}
-      </Picker>
+        {/* Right Column for Seconds Picker */}
+        <View style={styles.column}>
+          <Text style={styles.label}>Seconds</Text>
+          <Picker
+            selectedValue={seconds}
+            onValueChange={(itemValue) => setSeconds(itemValue)}
+            style={styles.picker}
+          >
+            {[...Array(60).keys()].map((second) => (
+              <Picker.Item key={second} label={`${second}`} value={second} />
+            ))}
+          </Picker>
+        </View>
+      </View>
 
       {/* Action buttons */}
       <View style={styles.buttonContainer}>
@@ -83,6 +85,16 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 18,
     marginVertical: 10,
+  },
+  pickersContainer: {
+    flexDirection: "row", // Horizontal alignment of the columns
+    justifyContent: "space-between",
+    width: "100%", // Make sure it uses the full width
+    marginBottom: 20,
+  },
+  column: {
+    width: "45%", // Ensure each column takes up 45% of the width
+    alignItems: "center", // Center the content within each column
   },
   picker: {
     width: 150,
