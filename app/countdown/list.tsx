@@ -10,7 +10,7 @@ import {
 import { router } from "expo-router";
 
 const predefinedDurations = ["1m", "40s", "20s", "2m", "30s", "10s"];
-const recentDurations = ["40s", "20s", "3m"];
+const recentDurations = ["5s", "40s", "20s", "3m"];
 
 export default function CountdownListScreen() {
   const [recentItems, setRecentItems] = useState(recentDurations);
