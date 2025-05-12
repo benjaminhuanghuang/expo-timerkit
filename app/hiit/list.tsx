@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
+import { useNavigation, NavigationProp } from "@react-navigation/native";
 
 type HIITSetting = {
   id: string;
@@ -22,10 +23,28 @@ const hiitPresets: HIITSetting[] = [
   { id: "3", name: "Endurance Boost", work: 40, rest: 20, rounds: 8 },
 ];
 
+type RootStackParamList = {
+  runner: {
+    work: number;
+    rest: number;
+    rounds: number;
+    name: string;
+  };
+};
+
 export default function HIITListScreen() {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
   const handleRun = (item: HIITSetting) => {
     console.log("Run:", item);
-    // Navigate to runner page with preset values
+
+    // Navigate to runner screen and pass settings
+    navigation.navigate("runner", {
+      work: item.work,
+      rest: item.rest,
+      rounds: item.rounds,
+      name: item.name,
+    });
   };
 
   const handleEdit = (item: HIITSetting) => {
