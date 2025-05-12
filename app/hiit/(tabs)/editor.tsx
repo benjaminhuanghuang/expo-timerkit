@@ -1,9 +1,9 @@
 import { View, Text } from "react-native";
 
-export default function HIITListScreen() {
+export default function HIITEditorScreen() {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>HIIT Timer List</Text>
+      <Text>HIIT Editor</Text>
     </View>
   );
 }

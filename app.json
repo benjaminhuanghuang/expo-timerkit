@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "expo-mma-timer",
-    "slug": "expo-mma-timer",
+    "name": "expo-multi-timer",
+    "slug": "expo-multi-timer",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "expommatimer",
+    "scheme": "expo-multi-timer",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
