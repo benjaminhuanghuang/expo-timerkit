@@ -18,7 +18,7 @@ export default function RootLayout() {
         <Stack.Screen name="hiit" options={{ headerShown: true, title: "" }} />
         <Stack.Screen
           name="countdown"
-          options={{ title: "Countdown Timer", headerShown: false }}
+          options={{ title: "", headerShown: true }}
         />
       </Stack>
     </SafeAreaView>
