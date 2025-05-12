@@ -4,7 +4,9 @@ import { useLocalSearchParams } from "expo-router";
 import { Audio } from "expo-av";
 
 export default function HIITRunnerScreen() {
+  // Get the parameters passed from the list screen
   const { work, rest, rounds, name } = useLocalSearchParams();
+
   const totalRounds = parseInt(rounds as string, 10);
   const [currentRound, setCurrentRound] = useState(1);
   const [phase, setPhase] = useState<"work" | "rest">("work");
@@ -12,8 +14,10 @@ export default function HIITRunnerScreen() {
   const soundRef = useRef<Audio.Sound | null>(null);
   const [roundsLeft, setRoundsLeft] = useState(totalRounds);
 
-  const [flash, setFlash] = useState(false);
+  const [flashing, setFlashing] = useState(false);
+
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const flashRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     startPhase("work");
@@ -58,10 +62,11 @@ export default function HIITRunnerScreen() {
     }, 1000);
   };
 
+  const phaseStyle = phase === "rest" ? styles.restText : styles.workText;
+
   return (
     <View style={styles.container}>
       <Text style={styles.planName}>{name}</Text>
-      <Text style={styles.title}>{name} Timer</Text>
       <Text style={styles.details}>
         Work: {work}s | Rest: {rest}s | Rounds: {rounds}
       </Text>
@@ -69,8 +74,8 @@ export default function HIITRunnerScreen() {
       <Text style={styles.roundText}>
         Round {currentRound} of {totalRounds}
       </Text>
-      <Text style={styles.phaseText}>{phase.toUpperCase()}</Text>
-      <Text style={styles.timer}>{secondsLeft}s</Text>
+      <Text style={[styles.phaseText, phaseStyle]}>{phase.toUpperCase()}</Text>
+      <Text style={[styles.timer, phaseStyle]}>{secondsLeft}</Text>
     </View>
   );
 }
@@ -86,6 +91,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 16,
   },
+  details: {
+    fontSize: 14,
+  },
   roundText: {
     fontSize: 18,
     marginBottom: 8,
@@ -96,8 +104,15 @@ const styles = StyleSheet.create({
     color: "#2980b9",
     marginBottom: 12,
   },
+  workText: {
+    color: "#e74c3c", // Default color for work phase
+  },
+  restText: {
+    color: "#2ecc71", // Green color for rest phase
+  },
   timer: {
-    fontSize: 48,
+    marginTop: 20,
+    fontSize: 200,
     fontWeight: "bold",
     color: "#e74c3c",
   },
