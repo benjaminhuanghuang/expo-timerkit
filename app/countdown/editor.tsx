@@ -9,12 +9,7 @@ export default function CustomCountdownScreen() {
 
   // Handle Start button press
   const handleStart = () => {
-    // Here you would handle the logic to start the countdown
-    // For now, we'll show an alert with the selected time
-    Alert.alert(
-      "Countdown Started",
-      `You have selected: ${minutes} minutes and ${seconds} seconds`
-    );
+    router.push("/countdown/runner");
   };
 
   // Handle Cancel button press

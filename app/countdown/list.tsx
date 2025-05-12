@@ -14,7 +14,7 @@ const recentDurations = ["40s", "20s", "3m"];
 
 export default function CountdownListScreen() {
   const [recentItems, setRecentItems] = useState(recentDurations);
-  const renderItem = ({ item }: { item: string }, canRemove: boolean) => (
+  const renderItem = ({ item }: { item: string }, canRemove = false) => (
     <View style={styles.itemContainer}>
       <Pressable
         style={({ pressed }) => [
@@ -37,7 +37,12 @@ export default function CountdownListScreen() {
   );
 
   const handleCreateCustomDuration = () => {
-    router.push("/countdown/editor");
+    router.push({
+      pathname: "/countdown/editor",
+      params: {
+        title: "Custom Duration",
+      },
+    });
   };
   const handleRemoveRecentItem = (item: string) => {};
   return (

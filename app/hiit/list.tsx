@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
+import { router } from "expo-router";
 
 type HIITSetting = {
   id: string;
@@ -36,14 +37,16 @@ export default function HIITListScreen() {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const handleRun = (item: HIITSetting) => {
-    console.log("Run:", item);
-
     // Navigate to runner screen and pass settings
-    navigation.navigate("runner", {
-      work: item.work,
-      rest: item.rest,
-      rounds: item.rounds,
-      name: item.name,
+    console.log("Run:", item);
+    router.push({
+      pathname: "/hiit/runner",
+      params: {
+        work: item.work,
+        rest: item.rest,
+        rounds: item.rounds,
+        name: item.name,
+      },
     });
   };
 

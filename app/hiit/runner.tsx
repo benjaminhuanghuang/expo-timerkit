@@ -1,15 +1,9 @@
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { RouteProp } from "@react-navigation/native";
-
-type RunnerScreenProps = {
-  route: RouteProp<{
-    params: { work: number; rest: number; rounds: number; name: string };
-  }>;
-};
-
-export default function HIITRunnerScreen({ route }: RunnerScreenProps) {
-  const { work, rest, rounds, name } = route.params;
+import { useRouter } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
+export default function HIITRunnerScreen() {
+  const { work, rest, rounds, name } = useLocalSearchParams();
 
   useEffect(() => {
     // Initialize timer logic here based on work, rest, rounds
