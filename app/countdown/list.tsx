@@ -7,6 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
+import { router } from "expo-router";
 
 const predefinedDurations = ["1m", "40s", "20s", "2m", "30s", "10s"];
 const recentDurations = ["40s", "20s", "3m"];
@@ -23,7 +24,9 @@ export default function CountdownListScreen() {
       <Text style={styles.text}>{item}</Text>
     </Pressable>
   );
-  const handleCreateCustomDuration = () => {};
+  const handleCreateCustomDuration = () => {
+    router.push("/countdown/editor");
+  };
   return (
     <View style={styles.container}>
       <TouchableOpacity
