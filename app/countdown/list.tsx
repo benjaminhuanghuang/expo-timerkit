@@ -36,12 +36,23 @@ export default function CountdownListScreen() {
       )}
     </View>
   );
+  function parseDurationToSeconds(input: string): number {
+    const minuteMatch = input.match(/(\d+)\s*m/);
+    const secondMatch = input.match(/(\d+)\s*s/);
+
+    const minutes = minuteMatch ? parseInt(minuteMatch[1], 10) : 0;
+    const seconds = secondMatch ? parseInt(secondMatch[1], 10) : 0;
+
+    return minutes * 60 + seconds;
+  }
+
   const runCountDown = (item: string) => {
+    const secondes = parseDurationToSeconds(item);
     // Navigate to countdown runner with the selected duration
     router.push({
       pathname: "/countdown/runner",
       params: {
-        duration: item,
+        duration: secondes,
       },
     });
   };
