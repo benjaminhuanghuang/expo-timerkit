@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, FlatList, Pressable, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
 
 type HIITSetting = {
   id: string;
@@ -16,16 +23,42 @@ const hiitPresets: HIITSetting[] = [
 ];
 
 export default function HIITListScreen() {
+  const handleRun = (item: HIITSetting) => {
+    console.log("Run:", item);
+    // Navigate to runner page with preset values
+  };
+
+  const handleEdit = (item: HIITSetting) => {
+    console.log("Edit:", item);
+    // Navigate to editor with preset values
+  };
+  const handleDelete = (itemId: string) => {};
   const renderItem = ({ item }: { item: HIITSetting }) => (
-    <Pressable
-      onPress={() => console.log(`Selected: ${item.name}`)}
-      style={({ pressed }) => [styles.card, pressed && styles.cardPressed]}
-    >
-      <Text style={styles.name}>{item.name}</Text>
-      <Text style={styles.details}>
-        Work: {item.work}s · Rest: {item.rest}s · Rounds: {item.rounds}
-      </Text>
-    </Pressable>
+    <View style={styles.card}>
+      <View style={styles.leftColumn}>
+        <Text style={styles.name}>{item.name}</Text>
+        <Text style={styles.details}>
+          Work: {item.work}s · Rest: {item.rest}s · Rounds: {item.rounds}
+        </Text>
+      </View>
+      <View style={styles.rightColumn}>
+        <TouchableOpacity style={styles.button} onPress={() => handleRun(item)}>
+          <FontAwesome name="play" color="#fff" />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.button, styles.editButton]}
+          onPress={() => handleEdit(item)}
+        >
+          <FontAwesome name="edit" color="#fff" />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.button, styles.deleteButton]}
+          onPress={() => handleDelete(item.id)}
+        >
+          <FontAwesome name="trash" color="#fff" />
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 
   return (
@@ -43,15 +76,19 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   card: {
+    flexDirection: "row", // Use row for description + actions layout
     backgroundColor: "#2ecc71",
     padding: 20,
     borderRadius: 12,
     marginBottom: 16,
-    elevation: 2,
   },
-  cardPressed: {
-    backgroundColor: "#27ae60",
-    transform: [{ scale: 0.98 }],
+  leftColumn: {
+    flex: 1, // The left column takes more space for the description
+    marginRight: 10,
+  },
+  rightColumn: {
+    justifyContent: "center", // Center the buttons vertically
+    alignItems: "center",
   },
   name: {
     fontSize: 18,
@@ -62,5 +99,21 @@ const styles = StyleSheet.create({
   details: {
     fontSize: 14,
     color: "#ecf0f1",
+  },
+  button: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#34495e",
+    borderRadius: 6,
+    marginBottom: 10,
+    width: 20,
+    height: 20,
+  },
+  editButton: {
+    backgroundColor: "#e67e22",
+  },
+  deleteButton: {
+    backgroundColor: "#e74c3c", // Red background for delete
   },
 });

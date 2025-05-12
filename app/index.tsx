@@ -9,8 +9,8 @@ type ButtonItem = {
 };
 
 const BUTTONS: ButtonItem[] = [
-  { icon: "hourglass", title: "HIIT Timer", path: "/hiit/list" },
-  { icon: "stopwatch-20", title: "Countdown Timer", path: "/countdown/list" },
+  { icon: "stopwatch-20", title: "HIIT Timer", path: "/hiit/list" },
+  { icon: "hourglass", title: "Countdown Timer", path: "/countdown/list" },
 ];
 
 export default function HomeScreen() {
