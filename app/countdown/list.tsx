@@ -133,6 +133,9 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: "center",
   },
+  itemPressed: {
+    backgroundColor: "#27ae60", // Darker shade for pressed state
+  },
   text: {
     fontSize: 18,
     color: "#fff",
