@@ -1,4 +1,6 @@
-# HIT(high-intensity interval training) Timer
+# Timerkit
+
+Timers for study, workout, spar ...
 
 - Expo 53 + React Native
 - Typescript
@@ -16,5 +18,7 @@
   npm run ios
   npm run web
 ```
+
+## Deploy
 
 ## To do
