@@ -1,28 +1,24 @@
-import { View, Text, Pressable, StyleSheet, FlatList } from "react-native";
+import { View, Text, Pressable, StyleSheet, FlatList, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
 import { FontAwesome5 } from "@expo/vector-icons";
-
-type ButtonItem = {
-  title: string;
-  path: string;
-  icon: React.ComponentProps<typeof FontAwesome5>["name"];
-};
-
-const BUTTONS: ButtonItem[] = [
-  { icon: "stopwatch-20", title: "HIIT Timer", path: "/hiit/list" },
-  { icon: "hourglass", title: "Countdown Timer", path: "/countdown/list" },
-];
+import { useQuery } from "@tanstack/react-query";
+import { getTimerButtons, TimerButton } from "./services/firebase";
 
 export default function HomeScreen() {
   const router = useRouter();
 
-  const renderItem = ({ item }: { item: (typeof BUTTONS)[number] }) => (
+  const { data: buttons, isLoading, error } = useQuery({
+    queryKey: ["timerButtons"],
+    queryFn: getTimerButtons,
+  });
+
+  const renderItem = ({ item }: { item: TimerButton }) => (
     <Pressable
       style={styles.button}
-      onPress={() => router.push(item.path as string)}
+      onPress={() => router.push(item.path as any)}
     >
       <FontAwesome5
-        name={item.icon}
+        name={item.icon as any}
         size={28}
         color="#fff"
         style={styles.buttonIcon}
@@ -31,11 +27,29 @@ export default function HomeScreen() {
     </Pressable>
   );
 
+  if (isLoading) {
+    return (
+      <View style={styles.centerContainer}>
+        <ActivityIndicator size="large" color="#3498db" />
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.centerContainer}>
+        <Text style={styles.errorText}>Error fetching data</Text>
+        <Text>{error.message}</Text>
+      </View>
+    );
+  }
+
   return (
     <FlatList
-      data={BUTTONS}
+      data={buttons}
       numColumns={2}
-      keyExtractor={(item) => item.path}
+      keyExtractor={(item) => item.id}
       renderItem={renderItem}
       contentContainerStyle={styles.container}
     />
@@ -46,6 +60,11 @@ const styles = StyleSheet.create({
   container: {
     padding: 16,
     gap: 16,
+  },
+  centerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   button: {
     flex: 1,
@@ -65,4 +84,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 16,
   },
+  errorText: {
+    color: 'red',
+    fontSize: 18,
+    marginBottom: 8,
+  }
 });
